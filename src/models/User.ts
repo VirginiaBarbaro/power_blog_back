@@ -1,11 +1,11 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 import bcrypt from "bcrypt";
 
-interface IUser {
-  id: number;
+export interface IUser {
+  id?: number;
   firstname: string;
   lastname: string;
-  username: string;
+  username?: string;
   email: string;
   avatar: string;
   password: string;

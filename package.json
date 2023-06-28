@@ -7,6 +7,7 @@
     "tsc": "tsc",
     "start": "node build/app.js",
     "tables": "npx ts-node src/createDbTables.ts",
+    "seeders": "npx ts-node src/seeders/runSeeders.ts",
     "dev": "ts-node-dev src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
