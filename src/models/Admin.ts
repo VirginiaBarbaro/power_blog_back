@@ -21,17 +21,60 @@ class Admin extends Model<IAdmin> implements IAdmin {
   public isAdmin!: boolean;
 
   async isValidPassword(password: string): Promise<boolean> {
-    return await bcrype.compare(password, this.password);
+    return await bcrypt.compare(password, this.password);
   }
 
   static initModel(sequelize: Sequelize): typeof Admin {
     Admin.init(
-      {},
+      {
+        id: {
+          type: DataTypes.INTEGER.UNSIGNED,
+          autoIncrement: true,
+          primaryKey: true,
+        },
+        firstname: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        lastname: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        email: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        avatar: {
+          type: DataTypes.STRING,
+          // allowNull: false
+        },
+        password: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        isAdmin: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: true,
+        },
+      },
       {
         sequelize,
         modelName: "Admin",
       }
     );
+
+    Admin.beforeBulkCreate(async (admins: Admin[]) => {
+      for (const admin of admins) {
+        admin.password = await bcrypt.hash(admin.password, 10);
+      }
+    });
+
+    Admin.beforeCreate(async (admin: Admin) => {
+      admin.password = await bcrypt.hash(admin.password, 10);
+    });
+
     return Admin;
   }
 }
+
+export default Admin;
