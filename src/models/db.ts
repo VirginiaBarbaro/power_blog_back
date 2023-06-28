@@ -1,5 +1,8 @@
 import { Sequelize } from "sequelize";
-import Admin from "./Admin";
+import User from "./User";
+import Article from "./Article";
+import Comment from "./Comment";
+import Favourite from "./Favourite";
 
 const sequelize = new Sequelize(
   //   process.env.DB_NAME,
@@ -17,6 +20,9 @@ const sequelize = new Sequelize(
   }
 );
 
-Admin.initModel(sequelize);
+User.initModel(sequelize);
+Article.initModel(sequelize);
+Comment.initModel(sequelize);
+Favourite.initModel(sequelize);
 
-export default { sequelize, Admin };
+export default { sequelize, User, Article, Comment, Favourite };
