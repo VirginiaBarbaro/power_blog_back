@@ -1,5 +1,5 @@
 import User from "../models/User";
-import db from "../models/db";
+import db from "../database/db";
 import { IUser } from "../models/User";
 
 const userSeeders = async () => {

@@ -1,4 +1,4 @@
-import db from "./models/db";
+import db from "./db";
 
 async function createDbTables() {
   await db.sequelize.sync({ force: true });

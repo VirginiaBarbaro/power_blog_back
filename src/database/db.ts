@@ -1,8 +1,9 @@
 import { Sequelize } from "sequelize";
-import User from "./User";
-import Article from "./Article";
-import Comment from "./Comment";
-import Favourite from "./Favourite";
+import User from "../models/User";
+import Article from "../models/Article";
+import Comment from "../models/Comment";
+import Favourite from "../models/Favourite";
+import testConnection from "./testConnection";
 
 const sequelize = new Sequelize(
   //   process.env.DB_NAME,
@@ -17,8 +18,10 @@ const sequelize = new Sequelize(
     host: "localhost",
     dialect: "mysql",
     logging: false,
-  }
+  },
 );
+
+testConnection(sequelize);
 
 User.initModel(sequelize);
 Article.initModel(sequelize);
