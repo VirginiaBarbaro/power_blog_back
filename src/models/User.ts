@@ -5,7 +5,7 @@ class User extends Model {
   declare id: number;
   declare firstname: string;
   declare lastname: string;
-  declare username: string;
+  declare username?: string;
   declare email: string;
   declare avatar: string;
   declare password: string;

@@ -26,8 +26,6 @@ export const sequelize = new Sequelize(
 //   console.log("[DB] Estructura de tablas actualizada");
 // })();
 
-// testConnection(sequelize);
-
 User.initModel(sequelize);
 Article.initModel(sequelize);
 Comment.initModel(sequelize);
