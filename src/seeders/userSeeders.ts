@@ -1,9 +1,8 @@
 import User from "../models/User";
 import db from "../database/db";
-import { IUser } from "../models/User";
 
 const userSeeders = async () => {
-  const user: IUser[] = [
+  const users = [
     {
       firstname: "Author",
       lastname: "Test",
@@ -23,7 +22,7 @@ const userSeeders = async () => {
       isAdmin: true,
     },
   ];
-  await db.User.bulkCreate(user);
+  await db.User.bulkCreate(users);
   console.log("[DB] Se corrieron los seeders de user");
 };
 

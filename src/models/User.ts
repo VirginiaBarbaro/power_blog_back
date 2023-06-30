@@ -1,32 +1,32 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 import bcrypt from "bcrypt";
 
-export interface IUser {
-  id?: number;
-  firstname: string;
-  lastname: string;
-  username?: string;
-  email: string;
-  avatar: string;
-  password: string;
-  isAdmin: boolean;
-}
+// export interface IUser {
+//   id?: number;
+//   firstname: string;
+//   lastname: string;
+//   username?: string;
+//   email: string;
+//   avatar: string;
+//   password: string;
+//   isAdmin: boolean;
+// }
 
-class User extends Model<IUser> implements IUser {
-  public id!: number;
-  public firstname!: string;
-  public lastname!: string;
-  public username!: string;
-  public email!: string;
-  public avatar!: string;
-  public password!: string;
-  public isAdmin!: boolean;
+class User extends Model {
+  declare id: number;
+  declare firstname: string;
+  declare lastname: string;
+  declare username: string;
+  declare email: string;
+  declare avatar: string;
+  declare password: string;
+  declare isAdmin: boolean;
 
   async isValidPassword(password: string): Promise<boolean> {
     return await bcrypt.compare(password, this.password);
   }
 
-  static initModel(sequelize: Sequelize): typeof User {
+  static initModel(sequelize: Sequelize) {
     User.init(
       {
         id: {
@@ -67,7 +67,7 @@ class User extends Model<IUser> implements IUser {
       {
         sequelize,
         modelName: "User",
-      }
+      },
     );
 
     User.beforeBulkCreate(async (users: User[]) => {

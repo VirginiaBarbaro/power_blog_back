@@ -1,19 +1,12 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 
-interface IArticle {
-  id: number;
-  title: string;
-  content: string;
-  image: string;
-}
+class Article extends Model {
+  declare id: number;
+  declare title: string;
+  declare content: string;
+  declare image: string;
 
-class Article extends Model<IArticle> implements IArticle {
-  public id!: number;
-  public title!: string;
-  public content!: string;
-  public image!: string;
-
-  static initModel(sequelize: Sequelize): typeof Article {
+  static initModel(sequelize: Sequelize) {
     Article.init(
       {
         id: {
@@ -37,7 +30,7 @@ class Article extends Model<IArticle> implements IArticle {
       {
         sequelize,
         modelName: "Article",
-      }
+      },
     );
     return Article;
   }

@@ -1,15 +1,10 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 
-interface IComment {
-  id: number;
-  content: string;
-}
+class Comment extends Model {
+  declare id: number;
+  declare content: string;
 
-class Comment extends Model<IComment> implements IComment {
-  public id!: number;
-  public content!: string;
-
-  static initModel(sequelize: Sequelize): typeof Comment {
+  static initModel(sequelize: Sequelize) {
     Comment.init(
       {
         id: {
@@ -25,7 +20,7 @@ class Comment extends Model<IComment> implements IComment {
       {
         sequelize,
         modelName: "Comment",
-      }
+      },
     );
     return Comment;
   }

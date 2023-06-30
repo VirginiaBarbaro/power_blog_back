@@ -1,13 +1,9 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 
-interface IFavourite {
-  id: number;
-}
+class Favourite extends Model {
+  declare id: number;
 
-class Favourite extends Model<IFavourite> implements IFavourite {
-  public id!: number;
-
-  static initModel(sequelize: Sequelize): typeof Favourite {
+  static initModel(sequelize: Sequelize) {
     Favourite.init(
       {
         id: {
@@ -19,7 +15,7 @@ class Favourite extends Model<IFavourite> implements IFavourite {
       {
         sequelize,
         modelName: "Favourite",
-      }
+      },
     );
     return Favourite;
   }
