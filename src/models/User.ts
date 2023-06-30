@@ -1,17 +1,6 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 import bcrypt from "bcrypt";
 
-// export interface IUser {
-//   id?: number;
-//   firstname: string;
-//   lastname: string;
-//   username?: string;
-//   email: string;
-//   avatar: string;
-//   password: string;
-//   isAdmin: boolean;
-// }
-
 class User extends Model {
   declare id: number;
   declare firstname: string;
@@ -66,7 +55,7 @@ class User extends Model {
       },
       {
         sequelize,
-        modelName: "User",
+        modelName: "user",
       },
     );
 
@@ -79,7 +68,6 @@ class User extends Model {
     User.beforeCreate(async (user: User) => {
       user.password = await bcrypt.hash(user.password, 10);
     });
-    return User;
   }
 }
 

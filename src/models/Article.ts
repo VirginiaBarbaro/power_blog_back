@@ -29,10 +29,9 @@ class Article extends Model {
       },
       {
         sequelize,
-        modelName: "Article",
+        modelName: "article",
       },
     );
-    return Article;
   }
 }
 

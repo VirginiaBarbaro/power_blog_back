@@ -3,9 +3,9 @@ import User from "../models/User";
 import Article from "../models/Article";
 import Comment from "../models/Comment";
 import Favourite from "../models/Favourite";
-import testConnection from "./testConnection";
+// import testConnection from "./testConnection";
 
-const sequelize = new Sequelize(
+export const sequelize = new Sequelize(
   //   process.env.DB_NAME,
   //   process.env.DB_USERNAME,
   //   process.env.DB_PASSWORD
@@ -21,7 +21,12 @@ const sequelize = new Sequelize(
   },
 );
 
-testConnection(sequelize);
+// (async () => {
+//   await sequelize.sync({ force: true });
+//   console.log("[DB] Estructura de tablas actualizada");
+// })();
+
+// testConnection(sequelize);
 
 User.initModel(sequelize);
 Article.initModel(sequelize);
@@ -46,4 +51,4 @@ Favourite.belongsTo(Article);
 User.hasMany(Favourite);
 Favourite.belongsTo(User);
 
-export default { sequelize, User, Article, Comment, Favourite };
+export default { User, Article, Comment, Favourite };

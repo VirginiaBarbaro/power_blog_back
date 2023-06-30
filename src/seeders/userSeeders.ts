@@ -1,4 +1,3 @@
-import User from "../models/User";
 import db from "../database/db";
 
 const userSeeders = async () => {

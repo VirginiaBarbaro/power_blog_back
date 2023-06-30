@@ -14,10 +14,9 @@ class Favourite extends Model {
       },
       {
         sequelize,
-        modelName: "Favourite",
+        modelName: "favourite",
       },
     );
-    return Favourite;
   }
 }
 

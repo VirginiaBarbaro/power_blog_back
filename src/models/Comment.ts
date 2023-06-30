@@ -19,10 +19,9 @@ class Comment extends Model {
       },
       {
         sequelize,
-        modelName: "Comment",
+        modelName: "comment",
       },
     );
-    return Comment;
   }
 }
 

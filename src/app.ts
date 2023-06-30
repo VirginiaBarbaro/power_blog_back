@@ -1,10 +1,11 @@
-import express, { Express } from "express";
-import dotenv from "dotenv";
+import express from "express";
+import * as dotenv from "dotenv";
 import cors from "cors";
 import routes from "./routes";
+import { sequelize } from "./database/db";
 
 dotenv.config();
-const app: Express = express();
+const app = express();
 const PORT = process.env.APP_PORT;
 
 //Middleware
@@ -19,3 +20,8 @@ app.use(routes);
 app.listen(PORT, () => {
   console.log(`[Express] 🚀 Server listening on: http://localhost:${PORT}`);
 });
+
+(async () => {
+  await sequelize.authenticate();
+  console.log("[DB] Database connected");
+})();
