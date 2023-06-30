@@ -3,7 +3,7 @@ import User from "../models/User";
 import Article from "../models/Article";
 import Comment from "../models/Comment";
 import Favourite from "../models/Favourite";
-// import testConnection from "./testConnection";
+import Admin from "../models/Admin";
 
 export const sequelize = new Sequelize(
   //   process.env.DB_NAME,
@@ -21,21 +21,28 @@ export const sequelize = new Sequelize(
   },
 );
 
-// (async () => {
-//   await sequelize.sync({ force: true });
-//   console.log("[DB] Estructura de tablas actualizada");
-// })();
+/* (async () => {
+  await sequelize.sync({ force: true });
+  console.log("[DB] Estructura de tablas actualizada");
+})(); */
 
 User.initModel(sequelize);
 Article.initModel(sequelize);
 Comment.initModel(sequelize);
 Favourite.initModel(sequelize);
+Admin.initModel(sequelize);
 
 User.hasMany(Article, {
   onDelete: "cascade",
   hooks: true,
 });
 Article.belongsTo(User);
+
+Admin.hasMany(Article, {
+  onDelete: "cascade",
+  hooks: true,
+});
+Article.belongsTo(Admin);
 
 Article.hasMany(Comment);
 Comment.belongsTo(Article);
@@ -49,4 +56,7 @@ Favourite.belongsTo(Article);
 User.hasMany(Favourite);
 Favourite.belongsTo(User);
 
-export default { User, Article, Comment, Favourite };
+Admin.hasMany(Favourite);
+Favourite.belongsTo(Admin);
+
+export default { User, Article, Comment, Favourite, Admin };

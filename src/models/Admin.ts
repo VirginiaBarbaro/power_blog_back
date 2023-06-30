@@ -1,7 +1,7 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 import bcrypt from "bcrypt";
 
-class User extends Model {
+class Admin extends Model {
   declare id: number;
   declare firstname: string;
   declare lastname: string;
@@ -16,7 +16,7 @@ class User extends Model {
   }
 
   static initModel(sequelize: Sequelize) {
-    User.init(
+    Admin.init(
       {
         id: {
           type: DataTypes.INTEGER.UNSIGNED,
@@ -50,25 +50,25 @@ class User extends Model {
         isAdmin: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
-          defaultValue: false,
+          defaultValue: true,
         },
       },
       {
         sequelize,
-        modelName: "user",
+        modelName: "admin",
       },
     );
 
-    User.beforeBulkCreate(async (users: User[]) => {
-      for (const user of users) {
-        user.password = await bcrypt.hash(user.password, 10);
+    Admin.beforeBulkCreate(async (admins: Admin[]) => {
+      for (const admin of admins) {
+        admin.password = await bcrypt.hash(admin.password, 10);
       }
     });
 
-    User.beforeCreate(async (user: User) => {
-      user.password = await bcrypt.hash(user.password, 10);
+    Admin.beforeCreate(async (admin: Admin) => {
+      admin.password = await bcrypt.hash(admin.password, 10);
     });
   }
 }
 
-export default User;
+export default Admin;

@@ -5,5 +5,5 @@ export interface CreateUserRequest {
   username?: string;
   avatar: string;
   password: string;
-  isAdmin: boolean;
+  isAdmin?: boolean;
 }

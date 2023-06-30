@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import db from "../database/db";
 
 const userSeeders = async () => {
@@ -10,15 +12,6 @@ const userSeeders = async () => {
       avatar: "author.jpg",
       password: "1234",
       isAdmin: false,
-    },
-    {
-      firstname: "Admin",
-      lastname: "Test",
-      username: "Admin01",
-      email: "admin@blog.com",
-      avatar: "admin.jpg",
-      password: "1234",
-      isAdmin: true,
     },
   ];
   await db.User.bulkCreate(users);

@@ -1,9 +1,9 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import authController from "../controllers/authController";
 
 const router: Router = Router();
 
-router.get("/", (_req: Request, res: Response) => {
-  res.send("Hola esta es la ruta de autenticacion");
-});
+router.post("/users", authController.userToken);
+router.post("/admins", authController.adminToken);
 
 export default router;
