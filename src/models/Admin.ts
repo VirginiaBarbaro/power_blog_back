@@ -68,6 +68,12 @@ class Admin extends Model {
     Admin.beforeCreate(async (admin: Admin) => {
       admin.password = await bcrypt.hash(admin.password, 10);
     });
+
+    Admin.beforeUpdate(async (admin: Admin) => {
+      if (admin.changed("password")) {
+        admin.password = await bcrypt.hash(admin.password, 10);
+      }
+    });
   }
 }
 

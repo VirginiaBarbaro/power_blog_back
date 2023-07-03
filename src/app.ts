@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import routes from "./routes";
 import { sequelize } from "./database/db";
+import morgan from "morgan";
 
 dotenv.config();
 const app = express();
@@ -10,6 +11,7 @@ const PORT = process.env.APP_PORT;
 
 //Middleware
 app.use(cors());
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
