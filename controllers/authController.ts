@@ -6,7 +6,7 @@ import User from "../models/User";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 
-async function userToken(req: Request, res: Response): Promise<void> {
+export async function userToken(req: Request, res: Response): Promise<void> {
   try {
     const { email, password } = req.body;
 
@@ -35,7 +35,7 @@ async function userToken(req: Request, res: Response): Promise<void> {
   }
 }
 
-async function adminToken(req: Request, res: Response): Promise<void> {
+export async function adminToken(req: Request, res: Response): Promise<void> {
   try {
     const { email, password } = req.body;
 
@@ -64,4 +64,3 @@ async function adminToken(req: Request, res: Response): Promise<void> {
   }
 }
 
-export default { userToken, adminToken };

@@ -2,7 +2,7 @@ import Admin from "../models/Admin";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 
-async function getAdmins(_req: Request, res: Response) {
+export async function getAdmins(_req: Request, res: Response) {
   try {
     const admins = await Admin.findAll({ attributes: { exclude: ["password"] } });
     res.json(admins);
@@ -12,7 +12,7 @@ async function getAdmins(_req: Request, res: Response) {
   }
 }
 
-async function getAdmin(req: Request, res: Response) {
+export async function getAdmin(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const admin = await Admin.findByPk(id, { attributes: { exclude: ["password"] } });
@@ -23,7 +23,7 @@ async function getAdmin(req: Request, res: Response) {
   }
 }
 
-async function createAdmin(req: Request, res: Response) {
+export async function createAdmin(req: Request, res: Response) {
   try {
     const { firstname, lastname, email, username, password } = req.body;
 
@@ -50,7 +50,7 @@ async function createAdmin(req: Request, res: Response) {
   }
 }
 
-async function updateAdmin(req: Request, res: Response) {
+export async function updateAdmin(req: Request, res: Response) {
   try {
     const { id } = req.params;
     let { firstname, lastname, email, password, username } = req.body;
@@ -86,7 +86,7 @@ async function updateAdmin(req: Request, res: Response) {
   }
 }
 
-async function destroyAdmin(req: Request, res: Response) {
+export async function destroyAdmin(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
@@ -100,4 +100,3 @@ async function destroyAdmin(req: Request, res: Response) {
   }
 }
 
-export default { getAdmins, getAdmin, createAdmin, updateAdmin, destroyAdmin };

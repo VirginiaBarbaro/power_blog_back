@@ -9,7 +9,7 @@ interface AuthRequest extends Request {
   };
 }
 
-async function getArticles(_req: Request, res: Response) {
+export async function getArticles(_req: Request, res: Response) {
   try {
     const articles = await Article.findAll();
     return res.json(articles);
@@ -19,7 +19,7 @@ async function getArticles(_req: Request, res: Response) {
   }
 }
 
-async function getArticle(req: Request, res: Response) {
+export async function getArticle(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
@@ -31,7 +31,7 @@ async function getArticle(req: Request, res: Response) {
   }
 }
 
-async function createArticle(req: AuthRequest, res: Response) {
+export async function createArticle(req: AuthRequest, res: Response) {
   try {
     const { title, content } = req.body;
     const userId = req.auth?.isAdmin ? null : req.auth?.id;
@@ -51,7 +51,7 @@ async function createArticle(req: AuthRequest, res: Response) {
   }
 }
 
-async function updateArticle(req: Request, res: Response) {
+export async function updateArticle(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
@@ -74,7 +74,7 @@ async function updateArticle(req: Request, res: Response) {
   }
 }
 
-async function destroyArticle(req: Request, res: Response) {
+export async function destroyArticle(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
@@ -87,5 +87,3 @@ async function destroyArticle(req: Request, res: Response) {
     return res.status(500).json({ error: "Internal server error" });
   }
 }
-
-export default { getArticles, getArticle, createArticle, updateArticle, destroyArticle };
