@@ -37,6 +37,12 @@ User.hasMany(Article, {
 });
 Article.belongsTo(User);
 
+User.hasMany(Comment);
+Comment.belongsTo(User);
+
+Admin.hasMany(Comment);
+Comment.belongsTo(Admin);
+
 Admin.hasMany(Article, {
   onDelete: "cascade",
   hooks: true,

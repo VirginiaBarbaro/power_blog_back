@@ -11,7 +11,6 @@ async function userToken(req: Request, res: Response): Promise<void> {
     const { email, password } = req.body;
 
     const user = await User.findOne({ where: { email } });
-
     if (user) {
       const checkJwt = await user.isValidPassword(password);
 

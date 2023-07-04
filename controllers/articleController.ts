@@ -1,5 +1,13 @@
 import { Request, Response } from "express";
 import Article from "../models/Article";
+// import { AuthRequest } from "../types/requestAuth";
+
+interface AuthRequest extends Request {
+  auth?: {
+    id: number;
+    isAdmin: boolean;
+  };
+}
 
 async function getArticles(_req: Request, res: Response) {
   try {
@@ -23,17 +31,20 @@ async function getArticle(req: Request, res: Response) {
   }
 }
 
-async function createArticle(req: Request, res: Response) {
+async function createArticle(req: AuthRequest, res: Response) {
   try {
     const { title, content } = req.body;
-
+    const userId = req.auth?.isAdmin ? null : req.auth?.id;
+    const adminId = req.auth?.isAdmin ? req.auth?.id : null;
     const article = await Article.create({
       title,
       content,
+      userId,
+      adminId,
       image: req.file?.path,
     });
-    res.json({ article, message: "Article successflly created" });
     await article.save();
+    return res.json({ article, message: "Article successflly created" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal server error" });
