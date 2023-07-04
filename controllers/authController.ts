@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+import {} from "../types/environment";
 import Admin from "../models/Admin";
 import User from "../models/User";
 import jwt from "jsonwebtoken";
@@ -13,7 +16,7 @@ async function userToken(req: Request, res: Response): Promise<void> {
       const checkJwt = await user.isValidPassword(password);
 
       if (checkJwt) {
-        const token = jwt.sign({ id: user.id, isAdmin: false }, "secretString");
+        const token = jwt.sign({ id: user.id, isAdmin: false }, `${process.env.JWT_KEY}`);
 
         res.json({
           token,
@@ -43,7 +46,7 @@ async function adminToken(req: Request, res: Response): Promise<void> {
       const checkJwt = await admin.isValidPassword(password);
 
       if (checkJwt) {
-        const token = jwt.sign({ id: admin.id, isAdmin: true }, "secretString");
+        const token = jwt.sign({ id: admin.id, isAdmin: true }, `${process.env.JWT_KEY}`);
 
         res.json({
           token,

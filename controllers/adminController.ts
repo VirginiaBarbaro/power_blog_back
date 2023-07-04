@@ -1,8 +1,6 @@
 import Admin from "../models/Admin";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
-import { CreateUserRequest } from "../types/user";
-import { UpdateUserRequest } from "../types/user";
 
 async function getAdmins(_req: Request, res: Response) {
   try {
@@ -27,20 +25,20 @@ async function getAdmin(req: Request, res: Response) {
 
 async function createAdmin(req: Request, res: Response) {
   try {
-    const adminData: CreateUserRequest = req.body;
+    const { firstname, lastname, email, username, password } = req.body;
 
-    const existingEmail = await Admin.findOne({ where: { email: adminData.email } });
+    const existingEmail = await Admin.findOne({ where: { email: email } });
 
     if (existingEmail) {
       return res.json({ message: "Email already exists!" });
     } else {
       const newAdmin = await Admin.create({
-        firstname: adminData.firstname,
-        lastname: adminData.lastname,
-        email: adminData.email,
-        username: adminData.username,
-        avatar: adminData.avatar,
-        password: adminData.password,
+        firstname,
+        lastname,
+        email,
+        username,
+        avatar: req.file?.path,
+        password,
       });
 
       res.json(newAdmin);
@@ -55,16 +53,26 @@ async function createAdmin(req: Request, res: Response) {
 async function updateAdmin(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const adminData: UpdateUserRequest = req.body;
+    let { firstname, lastname, email, password, username } = req.body;
 
-    if (adminData.password) {
-      adminData.password = await bcrypt.hash(adminData.password, 10);
+    if (password) {
+      password = await bcrypt.hash(password, 10);
     }
 
     //Pongo los [] porque es [affettedCount: numebr]
-    const [adminToUpdate] = await Admin.update(adminData, {
-      where: { id },
-    });
+    const [adminToUpdate] = await Admin.update(
+      {
+        password,
+        firstname,
+        lastname,
+        email,
+        username,
+        avatar: req.file?.path,
+      },
+      {
+        where: { id },
+      },
+    );
 
     if (adminToUpdate === 0) {
       return res.status(404).json({ error: "Admin not found" });
