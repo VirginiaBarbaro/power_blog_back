@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Article from "../models/Article";
-// import { AuthRequest } from "../types/requestAuth";
-
+import User from "../models/User";
+import Admin from "../models/Admin";
 interface AuthRequest extends Request {
   auth?: {
     id: number;
@@ -12,6 +12,18 @@ interface AuthRequest extends Request {
 export async function getArticles(_req: Request, res: Response) {
   try {
     const articles = await Article.findAll();
+
+    await Promise.all(
+      articles.map(async (article) => {
+        await article.reload({
+          include: [
+            { model: User, attributes: { exclude: ["password"] } },
+            { model: Admin, attributes: { exclude: ["password"] } },
+          ],
+        });
+      })
+    );
+
     return res.json(articles);
   } catch (error) {
     console.log(error);
@@ -24,6 +36,14 @@ export async function getArticle(req: Request, res: Response) {
     const { id } = req.params;
 
     const article = await Article.findByPk(id);
+
+    await article?.reload({
+      include: [
+        { model: User, attributes: { exclude: ["password"] } },
+        { model: Admin, attributes: { exclude: ["password"] } },
+      ],
+    });
+
     return res.json(article);
   } catch (error) {
     console.log(error);
@@ -65,7 +85,7 @@ export async function updateArticle(req: Request, res: Response) {
       },
       {
         where: { id },
-      },
+      }
     );
     res.json({ updatedArticle, message: "Article successfully updated!" });
   } catch (error) {

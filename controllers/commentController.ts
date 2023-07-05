@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import Comment from "../models/Comment";
+import User from "../models/User";
+import Admin from "../models/Admin";
 
 interface AuthenticateRequest extends Request {
   auth?: {
@@ -11,6 +13,17 @@ interface AuthenticateRequest extends Request {
 export async function getComments(_req: Request, res: Response) {
   try {
     const comments = await Comment.findAll();
+
+    await Promise.all(
+      comments.map(async (comment) => {
+        await comment.reload({
+          include: [
+            { model: User, attributes: { exclude: ["password"] } },
+            { model: Admin, attributes: { exclude: ["password"] } },
+          ],
+        });
+      })
+    );
     return res.status(201).json(comments);
   } catch (error) {
     console.log(error);
@@ -23,6 +36,14 @@ export async function getComment(req: Request, res: Response) {
     const { id } = req.params;
 
     const comment = await Comment.findByPk(id);
+
+    await comment?.reload({
+      include: [
+        { model: User, attributes: { exclude: ["password"] } },
+        { model: Admin, attributes: { exclude: ["password"] } },
+      ],
+    });
+
     return res.json(comment);
   } catch (error) {
     console.log(error);
@@ -63,7 +84,7 @@ export async function updateComment(req: Request, res: Response) {
       },
       {
         where: { id },
-      },
+      }
     );
     return res.status(200).json({ updatedComment, message: "Comment successfully updated" });
   } catch (error) {
