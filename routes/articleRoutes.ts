@@ -6,7 +6,6 @@ import {
   updateArticle,
   destroyArticle,
 } from "../controllers/articleController";
-// import articleController from "../controllers/articleController";
 import multer from "../libs/multer";
 import { expressjwt } from "express-jwt";
 const router: Router = Router();
