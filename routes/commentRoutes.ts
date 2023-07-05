@@ -17,11 +17,19 @@ router.get("/:id", getComment);
 router.post(
   "/:id",
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
-  createComment,
+  createComment
 );
 
-router.patch("/:id", updateComment);
+router.patch(
+  "/:id",
+  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  updateComment
+);
 
-router.delete("/:id", destroyComment);
+router.delete(
+  "/:id",
+  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  destroyComment
+);
 
 export default router;
