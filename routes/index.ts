@@ -13,6 +13,6 @@ router.use("/auth", authRoutes);
 router.use("/admins", adminRoutes);
 router.use("/articles", articleRoutes);
 router.use("/comments", commentRoutes);
-router.use("/favourite", favouriteRoutes);
+router.use("/favourites", favouriteRoutes);
 
 export default router;

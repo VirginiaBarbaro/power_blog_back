@@ -1,12 +1,70 @@
 import Article from "../models/Article";
 import Favourite from "../models/Favourite";
 import { Request, Response } from "express";
+import User from "../models/User";
+import Admin from "../models/Admin";
 
 interface AuthRequest extends Request {
   auth?: {
     id: number;
     isAdmin: boolean;
   };
+}
+
+export async function getOneFavourite(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+
+    const favouriteArticle = await Favourite.findOne({ where: { id } });
+
+    await favouriteArticle?.reload({
+      include: [
+        { model: Article },
+        { model: User, attributes: { exclude: ["password"] } },
+        { model: Admin, attributes: { exclude: ["password"] } },
+      ],
+    });
+
+    return res.json(favouriteArticle);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+export async function getFavouritesForAdmin(_req: Request, res: Response) {
+  try {
+    const favourites = await Favourite.findAll();
+    return res.json(favourites);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+export async function getFavouritesForUser(req: AuthRequest, res: Response) {
+  try {
+    const userId = req.auth?.id;
+
+    const favouritesArticles = await Favourite.findAll({ where: { userId } });
+
+    await Promise.all(
+      favouritesArticles.map(async (favouriteArticle) => {
+        await favouriteArticle.reload({
+          include: [
+            { model: Article },
+            { model: User, attributes: { exclude: ["password"] } },
+            { model: Admin, attributes: { exclude: ["password"] } },
+          ],
+        });
+      })
+    );
+
+    return res.json(favouritesArticles);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 }
 
 export async function saveFavouriteArticle(req: AuthRequest, res: Response) {
@@ -16,29 +74,50 @@ export async function saveFavouriteArticle(req: AuthRequest, res: Response) {
 
     const articleId = req.params.id;
 
-    const favouriteArticle = await Favourite.create({
-      userId,
-      adminId,
-      articleId: +articleId,
+    const exisistingFavourite = await Favourite.findOne({
+      where: { articleId, userId, adminId },
     });
-    await favouriteArticle.save();
 
-    return res.json({ favouriteArticle, Article, message: "Article succesffully saved!" });
+    if (exisistingFavourite) {
+      return res.status(400).json({ message: "The article has already been saved as a favorite" });
+    } else {
+      const favouriteArticle = await Favourite.create({
+        userId,
+        adminId,
+        articleId: +articleId,
+      });
+      await favouriteArticle.reload({
+        include: [
+          { model: Article },
+          { model: User, attributes: { exclude: ["password"] } },
+          { model: Admin, attributes: { exclude: ["password"] } },
+        ],
+      });
+      return res.json({ favouriteArticle, message: "Article succesffully saved!" });
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal server error" });
   }
 }
 
-export async function deleteFavoiriteArticle(req: Request, res: Response) {
+export async function deleteFavoriteArticle(req: AuthRequest, res: Response) {
   try {
     const { id } = req.params;
+    const userId = req.auth?.id;
 
-    const articleDestroyed = await Favourite.destroy({
-      where: { id },
+    const favorite = await Favourite.findOne({
+      where: { id, userId },
     });
-    return res.json(articleDestroyed);
+
+    if (!favorite) {
+      return res.status(404).json({ message: "Favorite article not found" });
+    } else {
+      await favorite.destroy();
+      return res.json({ message: "Favorite article successfully removed" });
+    }
   } catch (error) {
-    return res.status(500).json({ error: "Internal server error" });
+    console.log(error);
+    return res.status(500).json({ error: "Impossible delete favourite" });
   }
 }
