@@ -18,7 +18,11 @@ router.get(
   getFavouritesForAdmin
 );
 
-router.get("/:id", getOneFavourite);
+router.get(
+  "/:id",
+  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  getOneFavourite
+);
 
 router.get(
   "/",
