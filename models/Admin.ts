@@ -56,7 +56,7 @@ class Admin extends Model {
       {
         sequelize,
         modelName: "admin",
-      },
+      }
     );
 
     Admin.beforeBulkCreate(async (admins: Admin[]) => {

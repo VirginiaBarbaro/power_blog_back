@@ -79,6 +79,7 @@ export async function saveFavouriteArticle(req: AuthRequest, res: Response) {
     });
 
     if (exisistingFavourite) {
+      // await exisistingFavourite.destroy()
       return res.status(400).json({ message: "The article has already been saved as a favorite" });
     } else {
       const favouriteArticle = await Favourite.create({

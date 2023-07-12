@@ -24,13 +24,13 @@ class Article extends Model {
         },
         image: {
           type: DataTypes.STRING,
-          // allowNull: false
+          allowNull: false,
         },
       },
       {
         sequelize,
         modelName: "article",
-      },
+      }
     );
   }
 }
