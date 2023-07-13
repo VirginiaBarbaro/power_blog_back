@@ -2,7 +2,6 @@ import Article from "../models/Article";
 import Favourite from "../models/Favourite";
 import { Request, Response } from "express";
 import User from "../models/User";
-import Admin from "../models/Admin";
 
 interface AuthRequest extends Request {
   auth?: {
@@ -18,11 +17,7 @@ export async function getOneFavourite(req: Request, res: Response) {
     const favouriteArticle = await Favourite.findOne({ where: { id } });
 
     await favouriteArticle?.reload({
-      include: [
-        { model: Article },
-        { model: User, attributes: { exclude: ["password"] } },
-        { model: Admin, attributes: { exclude: ["password"] } },
-      ],
+      include: [{ model: Article }, { model: User, attributes: { exclude: ["password"] } }],
     });
 
     return res.json(favouriteArticle);
@@ -51,11 +46,7 @@ export async function getFavouritesForUser(req: AuthRequest, res: Response) {
     await Promise.all(
       favouritesArticles.map(async (favouriteArticle) => {
         await favouriteArticle.reload({
-          include: [
-            { model: Article },
-            { model: User, attributes: { exclude: ["password"] } },
-            { model: Admin, attributes: { exclude: ["password"] } },
-          ],
+          include: [{ model: Article }, { model: User, attributes: { exclude: ["password"] } }],
         });
       })
     );
@@ -88,11 +79,7 @@ export async function saveFavouriteArticle(req: AuthRequest, res: Response) {
         articleId: +articleId,
       });
       await favouriteArticle.reload({
-        include: [
-          { model: Article },
-          { model: User, attributes: { exclude: ["password"] } },
-          { model: Admin, attributes: { exclude: ["password"] } },
-        ],
+        include: [{ model: Article }, { model: User, attributes: { exclude: ["password"] } }],
       });
       return res.json({ favouriteArticle, message: "Article succesffully saved!" });
     }

@@ -3,9 +3,9 @@ dotenv.config();
 
 async function runSeeders(): Promise<void> {
   const userSeeders = await import("./userSeeders");
-  const adminSeeders = await import("./adminSeeders");
-  await adminSeeders.default();
+  const articleSeeders = await import("./articleSeeders");
   await userSeeders.default();
+  await articleSeeders.default();
   console.log("[DB] Los datos de prueba fueron creados");
 }
 

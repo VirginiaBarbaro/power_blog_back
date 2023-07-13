@@ -18,8 +18,12 @@ class Article extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        content: {
+        headline: {
           type: DataTypes.STRING,
+          allowNull: false,
+        },
+        content: {
+          type: DataTypes.TEXT("medium"),
           allowNull: false,
         },
         image: {

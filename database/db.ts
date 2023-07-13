@@ -5,7 +5,6 @@ import User from "../models/User";
 import Article from "../models/Article";
 import Comment from "../models/Comment";
 import Favourite from "../models/Favourite";
-import Admin from "../models/Admin";
 import {} from "../types/environment";
 
 const sequelizeOptions = {
@@ -29,7 +28,6 @@ User.initModel(sequelize);
 Article.initModel(sequelize);
 Comment.initModel(sequelize);
 Favourite.initModel(sequelize);
-Admin.initModel(sequelize);
 
 User.hasMany(Article, {
   onDelete: "cascade",
@@ -39,15 +37,6 @@ Article.belongsTo(User);
 
 User.hasMany(Comment);
 Comment.belongsTo(User);
-
-Admin.hasMany(Comment);
-Comment.belongsTo(Admin);
-
-Admin.hasMany(Article, {
-  onDelete: "cascade",
-  hooks: true,
-});
-Article.belongsTo(Admin);
 
 Article.hasMany(Comment);
 Comment.belongsTo(Article);
@@ -61,7 +50,4 @@ Favourite.belongsTo(Article);
 User.hasMany(Favourite);
 Favourite.belongsTo(User);
 
-Admin.hasMany(Favourite);
-Favourite.belongsTo(Admin);
-
-export default { User, Article, Comment, Favourite, Admin };
+export default { User, Article, Comment, Favourite };

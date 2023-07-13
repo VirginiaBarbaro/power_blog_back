@@ -9,9 +9,18 @@ const userSeeders = async () => {
       lastname: "Test",
       username: "Auth01",
       email: "author@blog.com",
-      avatar: "author.jpg",
+      avatar: "/foto_linkedin.jpg",
       password: "1234",
       isAdmin: false,
+    },
+    {
+      firstname: "Admin",
+      lastname: "Test",
+      username: "SuperUser",
+      email: "admin@blog.com",
+      avatar: "/foto_linkedin.jpg",
+      password: "1234",
+      isAdmin: true,
     },
   ];
   await db.User.bulkCreate(users);

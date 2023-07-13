@@ -2,7 +2,7 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 
-async function getUsers(_req: Request, res: Response) {
+export async function getUsers(_req: Request, res: Response) {
   try {
     const users = await User.findAll({ attributes: { exclude: ["password"] } });
     return res.json(users);
@@ -12,7 +12,7 @@ async function getUsers(_req: Request, res: Response) {
   }
 }
 
-async function getUser(req: Request, res: Response) {
+export async function getUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
@@ -24,7 +24,7 @@ async function getUser(req: Request, res: Response) {
   }
 }
 
-async function updateUser(req: Request, res: Response) {
+export async function updateUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
     let { password, firstname, lastname, username, email } = req.body;
@@ -44,7 +44,7 @@ async function updateUser(req: Request, res: Response) {
       },
       {
         where: { id },
-      },
+      }
     );
 
     if (userToUpdate === 0) {
@@ -59,7 +59,7 @@ async function updateUser(req: Request, res: Response) {
   }
 }
 
-async function createUser(req: Request, res: Response) {
+export async function createUser(req: Request, res: Response) {
   try {
     const { firstname, lastname, username, email, password } = req.body;
 
@@ -85,7 +85,7 @@ async function createUser(req: Request, res: Response) {
   }
 }
 
-async function destroyUser(req: Request, res: Response) {
+export async function destroyUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
@@ -98,4 +98,3 @@ async function destroyUser(req: Request, res: Response) {
     res.status(500).json({ error: "Error server, deleting user" });
   }
 }
-export default { getUsers, createUser, updateUser, getUser, destroyUser };

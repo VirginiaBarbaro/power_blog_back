@@ -5,6 +5,7 @@ import {
   getComment,
   updateComment,
   destroyComment,
+  getCommentsByArticle,
 } from "../controllers/commentController";
 import { expressjwt } from "express-jwt";
 
@@ -13,6 +14,8 @@ const router: Router = Router();
 router.get("/", getComments);
 
 router.get("/:id", getComment);
+
+router.get("/article/:articleId", getCommentsByArticle);
 
 router.post(
   "/:id",

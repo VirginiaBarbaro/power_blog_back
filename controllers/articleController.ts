@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Article from "../models/Article";
 import User from "../models/User";
-import Admin from "../models/Admin";
 interface AuthRequest extends Request {
   auth?: {
     id: number;
@@ -11,19 +10,9 @@ interface AuthRequest extends Request {
 
 export async function getArticles(_req: Request, res: Response) {
   try {
-    const articles = await Article.findAll();
-
-    await Promise.all(
-      articles.map(async (article) => {
-        await article.reload({
-          include: [
-            { model: User, attributes: { exclude: ["password"] } },
-            { model: Admin, attributes: { exclude: ["password"] } },
-          ],
-        });
-      })
-    );
-
+    const articles = await Article.findAll({
+      include: [{ model: User, attributes: { exclude: ["password", "createdAt", "updatedAt"] } }],
+    });
     return res.json(articles);
   } catch (error) {
     console.log(error);
@@ -35,13 +24,8 @@ export async function getArticle(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
-    const article = await Article.findByPk(id);
-
-    await article?.reload({
-      include: [
-        { model: User, attributes: { exclude: ["password"] } },
-        { model: Admin, attributes: { exclude: ["password"] } },
-      ],
+    const article = await Article.findByPk(id, {
+      include: [{ model: User, attributes: { exclude: ["password", "createdAt", "updatedAt"] } }],
     });
 
     return res.json(article);
@@ -53,14 +37,14 @@ export async function getArticle(req: Request, res: Response) {
 
 export async function createArticle(req: AuthRequest, res: Response) {
   try {
-    const { title, content } = req.body;
+    const { title, content, headline } = req.body;
     const userId = req.auth?.isAdmin ? null : req.auth?.id;
-    const adminId = req.auth?.isAdmin ? req.auth?.id : null;
+
     const article = await Article.create({
       title,
       content,
+      headline,
       userId,
-      adminId,
       image: req.file?.path,
     });
     await article.save();
@@ -75,12 +59,13 @@ export async function updateArticle(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
-    const { title, content } = req.body;
+    const { title, content, headline } = req.body;
 
     const updatedArticle = await Article.update(
       {
         title,
         content,
+        headline,
         image: req.file?.path,
       },
       {

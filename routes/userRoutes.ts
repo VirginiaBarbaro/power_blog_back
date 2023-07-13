@@ -1,16 +1,22 @@
 import { Router } from "express";
-import userController from "../controllers/userController";
+import {
+  getUsers,
+  getUser,
+  createUser,
+  updateUser,
+  destroyUser,
+} from "../controllers/userController";
 import multer from "../libs/multer";
 const router: Router = Router();
 
-router.get("/", userController.getUsers);
+router.get("/", getUsers);
 
-router.get("/:id", userController.getUser);
+router.get("/:id", getUser);
 
-router.post("/", multer.single("avatar"), userController.createUser);
+router.post("/", multer.single("avatar"), createUser);
 
-router.patch("/:id", multer.single("avatar"), userController.updateUser);
+router.patch("/:id", multer.single("avatar"), updateUser);
 
-router.delete("/:id", userController.destroyUser);
+router.delete("/:id", destroyUser);
 
 export default router;

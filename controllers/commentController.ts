@@ -1,13 +1,26 @@
 import { Request, Response } from "express";
 import Comment from "../models/Comment";
 import User from "../models/User";
-import Admin from "../models/Admin";
 
 interface AuthenticateRequest extends Request {
   auth?: {
     id: number;
     isAdmin: boolean;
   };
+}
+
+export async function getCommentsByArticle(req: Request, res: Response) {
+  try {
+    const { articleId } = req.params;
+    const comments = await Comment.findAll({
+      where: { articleId },
+      include: { model: User, attributes: { exclude: ["password"] } },
+    });
+    res.json(comments);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 }
 
 export async function getComments(_req: Request, res: Response) {
@@ -17,10 +30,7 @@ export async function getComments(_req: Request, res: Response) {
     await Promise.all(
       comments.map(async (comment) => {
         await comment.reload({
-          include: [
-            { model: User, attributes: { exclude: ["password"] } },
-            { model: Admin, attributes: { exclude: ["password"] } },
-          ],
+          include: [{ model: User, attributes: { exclude: ["password"] } }],
         });
       })
     );
@@ -38,10 +48,7 @@ export async function getComment(req: Request, res: Response) {
     const comment = await Comment.findByPk(id);
 
     await comment?.reload({
-      include: [
-        { model: User, attributes: { exclude: ["password"] } },
-        { model: Admin, attributes: { exclude: ["password"] } },
-      ],
+      include: [{ model: User, attributes: { exclude: ["password"] } }],
     });
 
     return res.json(comment);
