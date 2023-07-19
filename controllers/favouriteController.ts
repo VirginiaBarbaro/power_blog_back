@@ -60,22 +60,19 @@ export async function getFavouritesForUser(req: AuthRequest, res: Response) {
 
 export async function saveFavouriteArticle(req: AuthRequest, res: Response) {
   try {
-    const userId = req.auth?.isAdmin ? null : req.auth?.id;
-    const adminId = req.auth?.isAdmin ? req.auth?.id : null;
-
+    const userId = req.auth?.id;
     const articleId = req.params.id;
 
     const exisistingFavourite = await Favourite.findOne({
-      where: { articleId, userId, adminId },
+      where: { articleId, userId },
     });
 
     if (exisistingFavourite) {
-      // await exisistingFavourite.destroy()
+      // await exisistingFavourite.destroy();
       return res.status(400).json({ message: "The article has already been saved as a favorite" });
     } else {
       const favouriteArticle = await Favourite.create({
         userId,
-        adminId,
         articleId: +articleId,
       });
       await favouriteArticle.reload({

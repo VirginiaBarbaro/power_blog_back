@@ -27,7 +27,7 @@ export async function getUser(req: Request, res: Response) {
 export async function updateUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    let { password, firstname, lastname, username, email } = req.body;
+    let { password, firstname, lastname, username, email, bio } = req.body;
 
     if (password) {
       password = await bcrypt.hash(password, 10);
@@ -40,6 +40,7 @@ export async function updateUser(req: Request, res: Response) {
         lastname,
         email,
         username,
+        bio,
         avatar: req.file?.path,
       },
       {

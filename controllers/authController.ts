@@ -21,8 +21,11 @@ export async function userToken(req: Request, res: Response): Promise<void> {
           id: user.id,
           firstname: user.firstname,
           lastname: user.lastname,
+          username: user.username,
           email: user.email,
           isAdmin: false,
+          avatar: user.avatar,
+          bio: user.bio,
         });
       }
     } else {

@@ -12,6 +12,7 @@ const userSeeders = async () => {
       avatar: "/foto_linkedin.jpg",
       password: "1234",
       isAdmin: false,
+      bio: "Adventurous soul exploring life's wonders, seeking joy in every moment. Nature lover and dream chaser",
     },
     {
       firstname: "Admin",
@@ -21,6 +22,7 @@ const userSeeders = async () => {
       avatar: "/foto_linkedin.jpg",
       password: "1234",
       isAdmin: true,
+      bio: "Passionate coder, weaving lines of logic, shaping digital dreams, and embracing endless innovation with fervor",
     },
   ];
   await db.User.bulkCreate(users);

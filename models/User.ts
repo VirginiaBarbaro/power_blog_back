@@ -10,6 +10,7 @@ class User extends Model {
   declare avatar: string;
   declare password: string;
   declare isAdmin?: boolean;
+  declare bio: string;
 
   async isValidPassword(password: string): Promise<boolean> {
     return await bcrypt.compare(password, this.password);
@@ -39,9 +40,12 @@ class User extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        bio: {
+          type: DataTypes.STRING,
+        },
         avatar: {
           type: DataTypes.STRING,
-          // allowNull: false
+          allowNull: false,
         },
         password: {
           type: DataTypes.STRING,
@@ -56,7 +60,7 @@ class User extends Model {
       {
         sequelize,
         modelName: "user",
-      },
+      }
     );
 
     User.beforeBulkCreate(async (users: User[]) => {
