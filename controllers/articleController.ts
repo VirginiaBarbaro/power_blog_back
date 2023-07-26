@@ -8,6 +8,17 @@ interface AuthRequest extends Request {
   };
 }
 
+export async function getArticlesByUser(req: AuthRequest, res: Response) {
+  try {
+    const userId = req.params.userId;
+    const articles = await Article.findAll({ where: { userId } });
+    return res.status(200).json(articles);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "internal server error" });
+  }
+}
+
 export async function getArticles(_req: Request, res: Response) {
   try {
     const articles = await Article.findAll({
@@ -38,7 +49,7 @@ export async function getArticle(req: Request, res: Response) {
 export async function createArticle(req: AuthRequest, res: Response) {
   try {
     const { title, content, headline } = req.body;
-    const userId = req.auth?.isAdmin ? null : req.auth?.id;
+    const userId = req.auth?.id;
 
     const article = await Article.create({
       title,
@@ -72,7 +83,8 @@ export async function updateArticle(req: Request, res: Response) {
         where: { id },
       }
     );
-    res.json({ updatedArticle, message: "Article successfully updated!" });
+    console.log(req.body);
+    return res.json({ updatedArticle, message: "Article successfully updated!" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal server error" });

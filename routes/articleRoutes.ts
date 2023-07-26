@@ -5,6 +5,7 @@ import {
   createArticle,
   updateArticle,
   destroyArticle,
+  getArticlesByUser,
 } from "../controllers/articleController";
 import multer from "../libs/multer";
 import { expressjwt } from "express-jwt";
@@ -14,16 +15,31 @@ router.get("/", getArticles);
 
 router.get("/:id", getArticle);
 
+router.get(
+  "/user/:userId",
+  // expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  getArticlesByUser
+);
+
 router.post(
   "/",
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
   multer.single("image"),
-  createArticle,
+  createArticle
 );
 
-router.patch("/:id", multer.single("image"), updateArticle);
+router.patch(
+  "/:id",
+  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  multer.single("image"),
+  updateArticle
+);
 
-router.delete("/:id", destroyArticle);
+router.delete(
+  "/:id",
+  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  destroyArticle
+);
 
 export default router;
 

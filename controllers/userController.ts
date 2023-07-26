@@ -24,21 +24,15 @@ export async function getUser(req: Request, res: Response) {
   }
 }
 
-export async function updateUser(req: Request, res: Response) {
+export async function updateInfoUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    let { password, firstname, lastname, username, email, bio } = req.body;
+    let { firstname, lastname, username, bio } = req.body;
 
-    if (password) {
-      password = await bcrypt.hash(password, 10);
-    }
-
-    const [userToUpdate] = await User.update(
+    const userToUpdate = await User.update(
       {
-        password,
         firstname,
         lastname,
-        email,
         username,
         bio,
         avatar: req.file?.path,
@@ -47,22 +41,39 @@ export async function updateUser(req: Request, res: Response) {
         where: { id },
       }
     );
-
-    if (userToUpdate === 0) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    const updatedUser = await User.findByPk(id);
-    return res.json(updatedUser);
+    return res.json(userToUpdate);
   } catch (error) {
     console.log(error);
     res.json(500).json({ error: "Internal server error, impossible to update" });
   }
 }
 
+export async function updateUserCredentials(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+    let { password, email } = req.body;
+
+    if (password) {
+      password = await bcrypt.hash(password, 10);
+    }
+    const updatedCredentials = await User.update(
+      {
+        email,
+        password,
+      },
+      { where: { id } }
+    );
+
+    return res.status(200).json({ updatedCredentials, message: "Updated successfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Impossible to update information!" });
+  }
+}
+
 export async function createUser(req: Request, res: Response) {
   try {
-    const { firstname, lastname, username, email, password } = req.body;
+    const { firstname, lastname, username, email, password, bio } = req.body;
 
     const existingEmail = await User.findOne({ where: { email: email } });
 
@@ -73,6 +84,7 @@ export async function createUser(req: Request, res: Response) {
         firstname: firstname,
         lastname: lastname,
         email: email,
+        bio: bio,
         username: username,
         avatar: req.file?.path,
         password: password,

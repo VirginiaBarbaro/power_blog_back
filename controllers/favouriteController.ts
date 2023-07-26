@@ -46,10 +46,12 @@ export async function getFavouritesForUser(req: AuthRequest, res: Response) {
     await Promise.all(
       favouritesArticles.map(async (favouriteArticle) => {
         await favouriteArticle.reload({
-          include: [{ model: Article }, { model: User, attributes: { exclude: ["password"] } }],
+          include: [{ model: Article }],
         });
       })
     );
+
+    // { model: User, attributes: { exclude: ["password"] } }
 
     return res.json(favouritesArticles);
   } catch (error) {
