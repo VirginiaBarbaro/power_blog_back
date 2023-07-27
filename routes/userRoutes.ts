@@ -7,7 +7,6 @@ import {
   destroyUser,
   updateUserCredentials,
 } from "../controllers/userController";
-// import { expressjwt } from "express-jwt";
 import multer from "../libs/multer";
 import { expressjwt } from "express-jwt";
 const router: Router = Router();

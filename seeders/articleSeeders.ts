@@ -11,8 +11,8 @@ const articleSeeders = async () => {
       content:
         "Marine biodiversity is a fascinating subject that continues to captivate scientists and researchers around the world. The oceans are teeming with an incredible variety of life, from microscopic plankton to massive whales. Exploring the wonders of marine biodiversity involves studying the intricate ecosystems, understanding the interconnections between species, and uncovering the adaptations that enable marine life to thrive in diverse environments. Through exploration and scientific research, we gain insights into the importance of preserving and protecting these delicate ecosystems for future generations. The discoveries made in deep-sea trenches and coral reefs provide valuable knowledge that contributes to our understanding of the vast marine world and the vital role it plays in sustaining life on Earth.",
       image: "/art1.png",
-
       userId: 1,
+      categoryId: 5,
     },
     {
       title: "Unveiling the Marvels of Underwater Biodiversity",
@@ -22,6 +22,7 @@ const articleSeeders = async () => {
       image: "/art2.png",
 
       userId: 1,
+      categoryId: 5,
     },
     {
       title: "The Importance of Forest Conservation",
@@ -31,6 +32,7 @@ const articleSeeders = async () => {
       image: "/art3.png",
 
       userId: 1,
+      categoryId: 5,
     },
     {
       title: "Exploring Coral Reefs: A World of Biodiversity",
@@ -40,6 +42,7 @@ const articleSeeders = async () => {
       image: "/art4.png",
 
       userId: 1,
+      categoryId: 5,
     },
     {
       title: "The Marvels of Bird Migration",
@@ -49,6 +52,7 @@ const articleSeeders = async () => {
       image: "/art5.png",
 
       userId: 1,
+      categoryId: 5,
     },
     /* Tech */
     {
@@ -58,6 +62,7 @@ const articleSeeders = async () => {
         "Artificial intelligence (AI) is revolutionizing various aspects of our lives. From virtual assistants and autonomous vehicles to personalized recommendations and healthcare advancements, AI is driving innovation across industries. Machine learning algorithms enable computers to learn from data and make intelligent decisions, leading to improved efficiency and user experience. However, ethical considerations and responsible AI development are essential to ensure privacy, fairness, and transparency. As AI continues to evolve, its integration into everyday life has the potential to shape our future in unprecedented ways.",
       image: "/art6.png",
       userId: 2,
+      categoryId: 4,
     },
     {
       title: "The Power of Big Data Analytics",
@@ -66,6 +71,7 @@ const articleSeeders = async () => {
         "In today's data-driven world, big data analytics is playing a crucial role in helping businesses gain valuable insights and make informed decisions. By analyzing large and complex datasets, companies can identify patterns, trends, and correlations that lead to actionable intelligence. Big data analytics is transforming industries such as finance, marketing, healthcare, and manufacturing, enabling organizations to optimize operations, improve customer experiences, and drive innovation. However, effective data governance, security, and privacy measures are vital to address the challenges and ethical considerations associated with big data.",
       image: "/art7.png",
       userId: 2,
+      categoryId: 4,
     },
     {
       title: "The Evolution of Cloud Computing",
@@ -74,6 +80,7 @@ const articleSeeders = async () => {
         "Cloud computing has revolutionized the way businesses and individuals access and utilize technology resources. The shift from on-premises infrastructure to cloud-based services offers scalability, flexibility, and cost-efficiency. Cloud providers offer a range of services, including infrastructure as a service (IaaS), platform as a service (PaaS), and software as a service (SaaS). This evolution has enabled organizations to focus on innovation and digital transformation, leveraging cloud solutions to enhance productivity, collaboration, and agility. However, considerations such as data security, vendor lock-in, and regulatory compliance must be addressed when adopting cloud technologies.",
       image: "/art8.jpg",
       userId: 1,
+      categoryId: 4,
     },
     {
       title: "The Impact of Blockchain Technology on Industries",
@@ -82,6 +89,7 @@ const articleSeeders = async () => {
         "Blockchain technology has gained significant attention for its potential to revolutionize various industries. By providing a decentralized and immutable ledger, blockchain offers enhanced trust, security, and transparency in areas such as finance, supply chain management, healthcare, and voting systems. Smart contracts enable automated and tamper-proof execution of agreements, streamlining processes and reducing intermediaries. While blockchain holds great promise, challenges related to scalability, energy consumption, and regulatory frameworks need to be addressed for widespread adoption. As the technology matures, its impact on industries is expected to grow exponentially.",
       image: "/art9.png",
       userId: 2,
+      categoryId: 4,
     },
     {
       title: "The Future of Internet of Things (IoT)",
@@ -90,6 +98,7 @@ const articleSeeders = async () => {
         "The Internet of Things (IoT) is poised to revolutionize how we interact with the world around us. By connecting everyday objects and devices to the internet, IoT enables seamless communication, automation, and data exchange. Smart homes, connected cars, and industrial IoT applications are just a few examples of how IoT is transforming various domains. However, concerns regarding privacy, data security, and interoperability need to be addressed to fully unlock the potential of IoT. As the technology advances, the future of IoT holds immense possibilities for innovation, efficiency, and improved quality of life.",
       image: "/art10.png",
       userId: 1,
+      categoryId: 4,
     },
     /* Fashion */
     {
@@ -99,6 +108,7 @@ const articleSeeders = async () => {
         "Fashion trends are constantly changing, reflecting the evolving tastes and preferences of consumers. From runway shows to street style, fashion influencers play a crucial role in shaping the latest trends. The fashion industry embraces diversity, sustainability, and inclusivity as key influencers in contemporary fashion. Designers experiment with innovative materials and techniques to create unique and environmentally conscious garments. By staying attuned to fashion trends, individuals can express their personal style while embracing the dynamic nature of the fashion world.",
       image: "/art11.png",
       userId: 1,
+      categoryId: 2,
     },
     {
       title: "The Impact of Sustainable Fashion",
@@ -107,6 +117,7 @@ const articleSeeders = async () => {
         "Sustainable fashion is gaining momentum as consumers seek more ethical and eco-friendly clothing options. From eco-conscious materials to fair trade practices, sustainable fashion encompasses various aspects of responsible production and consumption. Fashion brands are embracing transparency, circularity, and upcycling to reduce their environmental footprint. By supporting sustainable fashion, individuals contribute to positive change in the industry and promote a more sustainable future. Choosing quality, timeless pieces and supporting ethical brands are essential steps in building a more sustainable and conscious wardrobe.",
       image: "/art12.png",
       userId: 1,
+      categoryId: 2,
     },
     {
       title: "The Evolution of Haute Couture",
@@ -115,6 +126,7 @@ const articleSeeders = async () => {
         "Haute couture represents the pinnacle of fashion craftsmanship and creativity. Originating in 19th-century Paris, haute couture embodies the art of creating custom-made, high-fashion garments. Today, haute couture continues to captivate with its intricate designs, luxurious fabrics, and meticulous handwork. Fashion houses push boundaries with avant-garde creations while maintaining the heritage of craftsmanship. Haute couture serves as a source of inspiration for ready-to-wear collections and influences the direction of fashion trends, showcasing the ongoing fusion of tradition and innovation in the world of fashion.",
       image: "/art13.png",
       userId: 1,
+      categoryId: 2,
     },
     {
       title: "The Influence of Street Style Fashion",
@@ -123,6 +135,7 @@ const articleSeeders = async () => {
         "Street style fashion has emerged as a powerful force, reshaping the fashion landscape. Originating from urban subcultures, streetwear blends elements of music, art, and individual expression. It has transcended traditional fashion boundaries and become a mainstream phenomenon, with collaborations between high-end designers and streetwear brands. Street style influencers and social media have played a significant role in amplifying its impact. The democratization of fashion through streetwear has allowed for more inclusivity and diversity in the industry, reflecting the unique identities and voices of individuals.",
       image: "/art14.png",
       userId: 2,
+      categoryId: 2,
     },
     {
       title: "The Enduring Allure of Vintage Fashion",
@@ -131,6 +144,7 @@ const articleSeeders = async () => {
         "Vintage fashion continues to captivate fashion enthusiasts with its timeless appeal and unique character. From iconic fashion eras like the 1920s to the 1990s, vintage garments evoke nostalgia and individuality. Vintage enthusiasts seek out one-of-a-kind pieces, appreciating the craftsmanship and stories behind them. The sustainability aspect of vintage fashion is also appealing, as it promotes reusing and recycling clothing. Whether it's a vintage find or a modern reinterpretation, incorporating vintage elements into personal style allows for a distinctive and timeless fashion statement.",
       image: "/art15.png",
       userId: 1,
+      categoryId: 2,
     },
     /* Finance */
     {
@@ -140,6 +154,7 @@ const articleSeeders = async () => {
         "Managing personal finances is crucial for achieving financial stability and long-term goals. Creating a budget helps track income and expenses, allowing individuals to make informed financial decisions. Saving and investing wisely are key to building wealth and securing a comfortable future. It's essential to develop good financial habits, such as avoiding excessive debt and maintaining an emergency fund. Understanding financial concepts like compound interest and diversification can help individuals make informed investment choices. By taking control of personal finances, individuals can work towards financial independence and achieve their financial aspirations.",
       image: "/art16.png",
       userId: 1,
+      categoryId: 1,
     },
     {
       title: "The Role of Financial Technology (FinTech)",
@@ -148,6 +163,7 @@ const articleSeeders = async () => {
         "Financial technology, or FinTech, is revolutionizing the financial industry by leveraging technology to provide innovative financial services. Mobile banking, digital payments, and robo-advisors are just a few examples of how FinTech is reshaping the way individuals manage their finances. FinTech companies are streamlining processes, increasing accessibility, and offering personalized solutions to consumers. However, with the rise of FinTech, considerations such as data security, privacy, and regulatory compliance become crucial. The continued growth of FinTech is expected to drive further disruption and innovation in the financial sector.",
       image: "/art17.png",
       userId: 1,
+      categoryId: 1,
     },
     {
       title: "Understanding the Basics of Investment",
@@ -156,6 +172,7 @@ const articleSeeders = async () => {
         "Investing is a fundamental aspect of wealth-building and achieving long-term financial goals. Stocks, bonds, and mutual funds offer individuals the opportunity to participate in the financial markets and potentially earn returns. Diversification, asset allocation, and risk management are key principles to consider when creating an investment portfolio. It's essential to understand investment options, research potential investments, and stay informed about market trends. While investing carries inherent risks, it also offers the potential for growth and wealth accumulation over time.",
       image: "/art18.png",
       userId: 2,
+      categoryId: 1,
     },
     {
       title: "The Importance of Financial Planning",
@@ -164,6 +181,7 @@ const articleSeeders = async () => {
         "Financial planning is essential for individuals and families to achieve their financial goals and secure their future. It involves setting financial objectives, creating a budget, and developing a strategy to manage income, expenses, and savings. Financial planning encompasses various aspects, including retirement planning, insurance coverage, tax planning, and estate planning. Seeking professional guidance from financial advisors can provide valuable insights and expertise. By implementing a comprehensive financial plan, individuals can make informed decisions and work towards a financially secure future.",
       image: "/art19.png",
       userId: 1,
+      categoryId: 1,
     },
     {
       title: "The Impact of Global Economic Trends",
@@ -172,6 +190,7 @@ const articleSeeders = async () => {
         "Global economic trends play a significant role in shaping the business landscape and impacting individuals worldwide. Factors such as economic growth, inflation, interest rates, and geopolitical events influence financial markets and investment decisions. Understanding these trends helps individuals and businesses navigate potential risks and identify opportunities. Economic indicators and reports provide insights into the health of economies and guide decision-making. Staying informed about global economic trends enables individuals to make informed financial choices and adapt to changing market conditions.",
       image: "/art20.png",
       userId: 2,
+      categoryId: 1,
     },
     /* Gaming */
     {
@@ -181,6 +200,7 @@ const articleSeeders = async () => {
         "Gaming consoles have come a long way since the early days of Pong and Atari. From iconic systems like the Nintendo Entertainment System (NES) to the latest PlayStation and Xbox consoles, gaming technology has evolved exponentially. Modern consoles offer immersive graphics, realistic gameplay, and online multiplayer experiences. They have become entertainment hubs, integrating streaming services and social features. The gaming industry continues to push the boundaries of technology, delivering new gaming experiences and shaping the future of interactive entertainment.",
       image: "/art21.png",
       userId: 1,
+      categoryId: 3,
     },
     {
       title: "The Rise of Esports",
@@ -190,6 +210,7 @@ const articleSeeders = async () => {
       image: "art22.png",
 
       userId: 1,
+      categoryId: 3,
     },
     {
       title: "Exploring Virtual Reality (VR) Gaming",
@@ -198,6 +219,7 @@ const articleSeeders = async () => {
         "Virtual Reality (VR) gaming offers an entirely new level of immersion and interactivity. With VR headsets, players can step into virtual worlds and experience games in a whole new way. The technology tracks head movements and provides a 360-degree view, creating a sense of presence and realism. VR gaming extends beyond traditional genres, allowing players to explore new types of experiences and gameplay mechanics. While still evolving, VR gaming has the potential to revolutionize the gaming industry and redefine how we interact with digital entertainment.",
       image: "/art23.png",
       userId: 2,
+      categoryId: 3,
     },
     {
       title: "The Influence of Gaming on Popular Culture",
@@ -206,6 +228,7 @@ const articleSeeders = async () => {
         "Gaming has transcended its origins to become a major influence on popular culture. Video game franchises like Super Mario, Pokémon, and The Legend of Zelda have become iconic symbols recognized by millions worldwide. Gaming has inspired movies, TV shows, music, and even fashion trends. Cosplay, the art of dressing up as game characters, has gained a dedicated following. Gaming has also shaped social interactions, with multiplayer games fostering communities and friendships. The impact of gaming on popular culture continues to grow as the medium evolves and reaches new audiences.",
       image: "/art24.png",
       userId: 1,
+      categoryId: 3,
     },
     {
       title: "The Benefits of Gaming",
@@ -214,6 +237,7 @@ const articleSeeders = async () => {
         "Gaming offers more than entertainment; it has various positive effects on individuals. Video games can improve cognitive skills, problem-solving abilities, and hand-eye coordination. They can also promote teamwork and social interaction through multiplayer experiences. Gaming communities provide spaces for like-minded individuals to connect and share experiences. Moreover, some games incorporate educational elements, teaching players about history, science, and other subjects. While moderation and responsible gaming practices are essential, gaming can provide meaningful experiences and benefits to players of all ages.",
       image: "/art25.png",
       userId: 2,
+      categoryId: 3,
     },
   ];
   await db.Article.bulkCreate(articles);

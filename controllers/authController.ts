@@ -14,7 +14,7 @@ export async function userToken(req: Request, res: Response): Promise<void> {
       const checkJwt = await user.isValidPassword(password);
 
       if (checkJwt) {
-        const token = jwt.sign({ id: user.id, isAdmin: false }, `${process.env.JWT_KEY}`);
+        const token = jwt.sign({ id: user.id, isAdmin: user.isAdmin }, `${process.env.JWT_KEY}`);
 
         res.json({
           token,
@@ -23,7 +23,7 @@ export async function userToken(req: Request, res: Response): Promise<void> {
           lastname: user.lastname,
           username: user.username,
           email: user.email,
-          isAdmin: false,
+          isAdmin: user.isAdmin,
           avatar: user.avatar,
           bio: user.bio,
         });

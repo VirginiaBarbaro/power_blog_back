@@ -48,13 +48,14 @@ export async function getArticle(req: Request, res: Response) {
 
 export async function createArticle(req: AuthRequest, res: Response) {
   try {
-    const { title, content, headline } = req.body;
+    const { title, content, headline, categoryId } = req.body;
     const userId = req.auth?.id;
 
     const article = await Article.create({
       title,
       content,
       headline,
+      categoryId,
       userId,
       image: req.file?.path,
     });
