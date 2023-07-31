@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Article from "../models/Article";
 import User from "../models/User";
+import Category from "../models/Category";
 interface AuthRequest extends Request {
   auth?: {
     id: number;
@@ -22,7 +23,10 @@ export async function getArticlesByUser(req: AuthRequest, res: Response) {
 export async function getArticles(_req: Request, res: Response) {
   try {
     const articles = await Article.findAll({
-      include: [{ model: User, attributes: { exclude: ["password", "createdAt", "updatedAt"] } }],
+      include: [
+        { model: Category },
+        { model: User, attributes: { exclude: ["password", "createdAt", "updatedAt"] } },
+      ],
     });
     return res.json(articles);
   } catch (error) {

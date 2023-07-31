@@ -62,15 +62,10 @@ export async function createComment(req: AuthenticateRequest, res: Response) {
   try {
     const articleId = req.params.id;
     const { content } = req.body;
-    /* La variable userId se establecerá en null si el usuario autenticado es un administrador */
-    const userId = req.auth?.isAdmin ? null : req.auth?.id;
-    /* La variable adminId se establecerá en null si el usuario autenticado es un usuario comun */
-    const adminId = req.auth?.isAdmin ? req.auth?.id : null;
-
+    const userId = req.auth?.id;
     const comment = await Comment.create({
       content,
       userId,
-      adminId,
       articleId: articleId,
     });
     await comment.save();

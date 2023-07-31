@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 
 export async function getCategories(_req: Request, res: Response) {
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({ include: [{ model: Article }] });
     return res.status(200).json(categories);
   } catch (error) {
     console.log(error);

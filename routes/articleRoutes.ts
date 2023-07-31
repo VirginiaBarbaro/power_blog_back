@@ -17,7 +17,6 @@ router.get("/:id", getArticle);
 
 router.get(
   "/user/:userId",
-  // expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
   getArticlesByUser
 );
 

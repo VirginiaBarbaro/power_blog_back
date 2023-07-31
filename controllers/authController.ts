@@ -29,10 +29,10 @@ export async function userToken(req: Request, res: Response): Promise<void> {
         });
       }
     } else {
-      res.status(406).json({ error: "Invalid credentials" });
+      res.status(406).json({ message: "Invalid credentials" });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 }
