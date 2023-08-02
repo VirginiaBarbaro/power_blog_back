@@ -9,6 +9,8 @@ import {
 } from "../controllers/userController";
 import multer from "../libs/multer";
 import { expressjwt } from "express-jwt";
+import requireAdmin from "../middlewares/requireAdmin";
+
 const router: Router = Router();
 
 router.get("/", getUsers);
@@ -26,10 +28,15 @@ router.patch(
 
 router.patch(
   "/credentials/:id",
-  // expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
   updateUserCredentials
 );
 
-router.delete("/:id", destroyUser);
+router.delete(
+  "/:id",
+  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  requireAdmin,
+  destroyUser
+);
 
 export default router;

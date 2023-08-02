@@ -105,7 +105,7 @@ export async function destroyUser(req: Request, res: Response) {
     const userToDestroy = await User.destroy({
       where: { id },
     });
-    res.json(userToDestroy);
+    res.status(200).json({ userToDestroy, message: "User deleted successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Error server, deleting user" });

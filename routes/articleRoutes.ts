@@ -9,16 +9,14 @@ import {
 } from "../controllers/articleController";
 import multer from "../libs/multer";
 import { expressjwt } from "express-jwt";
+import requireAdmin from "../middlewares/requireAdmin";
 const router: Router = Router();
 
 router.get("/", getArticles);
 
 router.get("/:id", getArticle);
 
-router.get(
-  "/user/:userId",
-  getArticlesByUser
-);
+router.get("/user/:userId", getArticlesByUser);
 
 router.post(
   "/",
@@ -37,6 +35,7 @@ router.patch(
 router.delete(
   "/:id",
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
+  requireAdmin,
   destroyArticle
 );
 

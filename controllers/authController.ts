@@ -15,7 +15,6 @@ export async function userToken(req: Request, res: Response): Promise<void> {
 
       if (checkJwt) {
         const token = jwt.sign({ id: user.id, isAdmin: user.isAdmin }, `${process.env.JWT_KEY}`);
-
         res.json({
           token,
           id: user.id,
@@ -27,6 +26,7 @@ export async function userToken(req: Request, res: Response): Promise<void> {
           avatar: user.avatar,
           bio: user.bio,
         });
+        console.log(token);
       }
     } else {
       res.status(406).json({ message: "Invalid credentials" });
