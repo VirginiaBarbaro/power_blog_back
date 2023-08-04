@@ -1,3 +1,5 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import { Router } from "express";
 import {
   getUsers,
@@ -31,6 +33,8 @@ router.patch(
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
   updateUserCredentials
 );
+
+console.log(process.env.JWT_KEY, "user");
 
 router.delete(
   "/:id",

@@ -15,6 +15,7 @@ router.get("/", getCategories);
 
 router.get("/:name", getCategory);
 
+
 router.post(
   "/",
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
@@ -22,12 +23,15 @@ router.post(
   createCategory
 );
 
+console.log(process.env.JWT_KEY, "category");
+
 router.patch(
   "/:id",
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
   requireAdmin,
   updateCategory
 );
+
 
 router.delete(
   "/:id",

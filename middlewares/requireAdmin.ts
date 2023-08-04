@@ -7,8 +7,6 @@ export interface AuthRequest extends Request {
 }
 
 function requireAdmin(req: AuthRequest, res: Response, next: NextFunction) {
-  console.log(process.env.JWT_KEY);
-  console.log(req.auth);
   if (req.auth && req.auth.isAdmin) {
     return next();
   } else {

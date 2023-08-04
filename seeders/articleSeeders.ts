@@ -78,7 +78,7 @@ const articleSeeders = async () => {
       headline: "From Infrastructure to Platform and Software Services",
       content:
         "Cloud computing has revolutionized the way businesses and individuals access and utilize technology resources. The shift from on-premises infrastructure to cloud-based services offers scalability, flexibility, and cost-efficiency. Cloud providers offer a range of services, including infrastructure as a service (IaaS), platform as a service (PaaS), and software as a service (SaaS). This evolution has enabled organizations to focus on innovation and digital transformation, leveraging cloud solutions to enhance productivity, collaboration, and agility. However, considerations such as data security, vendor lock-in, and regulatory compliance must be addressed when adopting cloud technologies.",
-      image: "/art8.jpg",
+      image: "/art8.jpeg",
       userId: 1,
       categoryId: 4,
     },

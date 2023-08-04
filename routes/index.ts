@@ -8,11 +8,11 @@ import categoryRoutes from "./categoryRoutes";
 
 const router: Router = Router();
 
-router.use("/users", userRoutes);
+router.use("/categories", categoryRoutes);
 router.use("/auth", authRoutes);
 router.use("/articles", articleRoutes);
 router.use("/comments", commentRoutes);
 router.use("/favourites", favouriteRoutes);
-router.use("/categories", categoryRoutes);
+router.use("/users", userRoutes);
 
 export default router;
