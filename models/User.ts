@@ -45,7 +45,7 @@ class User extends Model {
         },
         avatar: {
           type: DataTypes.STRING,
-          allowNull: false,
+          // allowNull: false,
         },
         password: {
           type: DataTypes.STRING,

@@ -73,7 +73,7 @@ export async function updateUserCredentials(req: Request, res: Response) {
 
 export async function createUser(req: Request, res: Response) {
   try {
-    const { firstname, lastname, username, email, password, bio } = req.body;
+    const { firstname, lastname, username, email, password, bio, isAdmin } = req.body;
 
     const existingEmail = await User.findOne({ where: { email: email } });
 
@@ -87,8 +87,10 @@ export async function createUser(req: Request, res: Response) {
         bio: bio,
         username: username,
         avatar: req.file?.path,
+        isAdmin: isAdmin,
         password: password,
       });
+      console.log(isAdmin);
       res.json({ message: "User successfully created", newUser });
       await newUser.save();
     }
