@@ -75,13 +75,14 @@ export async function updateArticle(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
-    const { title, content, headline } = req.body;
+    const { title, content, headline, categoryId } = req.body;
 
     const updatedArticle = await Article.update(
       {
         title,
         content,
         headline,
+        categoryId,
         image: req.file?.path,
       },
       {
