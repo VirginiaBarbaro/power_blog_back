@@ -65,7 +65,7 @@ export async function deleteCategory(req: Request, res: Response) {
     const categoryToDelete = await Category.destroy({
       where: { id },
     });
-    return res.status(200).json(categoryToDelete);
+    return res.status(200).json({ message: "Category successfully deleted!", categoryToDelete });
   } catch (error) {
     console.log(error);
     return res.status(200).json({ message: "Error on deleting category" });
