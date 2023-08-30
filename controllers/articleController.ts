@@ -89,7 +89,6 @@ export async function updateArticle(req: Request, res: Response) {
         where: { id },
       }
     );
-    console.log(req.body);
     return res.json({ updatedArticle, message: "Article successfully updated!" });
   } catch (error) {
     console.log(error);

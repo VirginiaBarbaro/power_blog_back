@@ -26,7 +26,6 @@ export async function userToken(req: Request, res: Response): Promise<void> {
           avatar: user.avatar,
           bio: user.bio,
         });
-        console.log(token);
       }
     } else {
       res.status(406).json({ message: "Invalid credentials" });

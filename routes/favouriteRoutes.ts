@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
   saveFavouriteArticle,
-  deleteFavoriteArticle,
   getFavouritesForUser,
   getFavouritesForAdmin,
   getOneFavourite,
@@ -34,12 +33,6 @@ router.post(
   "/:id",
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
   saveFavouriteArticle
-);
-
-router.delete(
-  "/:id",
-  expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),
-  deleteFavoriteArticle
 );
 
 export default router;

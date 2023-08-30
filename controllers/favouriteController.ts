@@ -70,8 +70,10 @@ export async function saveFavouriteArticle(req: AuthRequest, res: Response) {
     });
 
     if (exisistingFavourite) {
-      // await exisistingFavourite.destroy();
-      return res.status(400).json({ message: "The article has already been saved as a favorite" });
+      await exisistingFavourite.destroy();
+      return res
+        .status(200)
+        .json({ message: "The article has already been cancelled as a favorite" });
     } else {
       const favouriteArticle = await Favourite.create({
         userId,
@@ -85,26 +87,5 @@ export async function saveFavouriteArticle(req: AuthRequest, res: Response) {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal server error" });
-  }
-}
-
-export async function deleteFavoriteArticle(req: AuthRequest, res: Response) {
-  try {
-    const { id } = req.params;
-    const userId = req.auth?.id;
-
-    const favorite = await Favourite.findOne({
-      where: { id, userId },
-    });
-
-    if (!favorite) {
-      return res.status(404).json({ message: "Favorite article not found" });
-    } else {
-      await favorite.destroy();
-      return res.json({ message: "Favorite article successfully removed" });
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Impossible delete favourite" });
   }
 }

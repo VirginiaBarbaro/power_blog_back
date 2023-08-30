@@ -89,7 +89,6 @@ export async function createUser(req: Request, res: Response) {
         isAdmin: isAdmin,
         password: password,
       });
-      console.log(req.body);
       res.json({ message: "User successfully created", newUser });
       await newUser.save();
     }
