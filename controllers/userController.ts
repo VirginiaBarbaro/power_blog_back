@@ -89,7 +89,7 @@ export async function createUser(req: Request, res: Response) {
         isAdmin: isAdmin,
         password: password,
       });
-      res.json({ message: "User successfully created", newUser });
+      res.status(200).json({ message: "User successfully created", newUser });
       await newUser.save();
     }
   } catch (error) {
