@@ -33,7 +33,7 @@ export async function createCategory(req: Request, res: Response) {
       name,
     });
     await newCategory.save();
-    return res.status(200).json(newCategory);
+    return res.status(200).json({ message: "New category has been created!", newCategory });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: "Impossible to create a category" });
@@ -52,7 +52,8 @@ export async function updateCategory(req: Request, res: Response) {
         where: { id },
       }
     );
-    return res.status(200).json(updatedCategory);
+    console.log(req.body);
+    return res.status(200).json({ message: "Category edited!", updatedCategory });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Impossible to update a categroy" });
