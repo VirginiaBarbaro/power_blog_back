@@ -34,8 +34,6 @@ router.patch(
   updateUserCredentials
 );
 
-console.log(process.env.JWT_KEY, "user");
-
 router.delete(
   "/:id",
   expressjwt({ secret: `${process.env.JWT_KEY}`, algorithms: ["HS256"] }),

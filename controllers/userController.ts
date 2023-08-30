@@ -74,7 +74,6 @@ export async function updateUserCredentials(req: Request, res: Response) {
 export async function createUser(req: Request, res: Response) {
   try {
     const { firstname, lastname, username, email, password, bio, isAdmin } = req.body;
-
     const existingEmail = await User.findOne({ where: { email: email } });
 
     if (existingEmail) {
@@ -90,7 +89,7 @@ export async function createUser(req: Request, res: Response) {
         isAdmin: isAdmin,
         password: password,
       });
-      console.log(isAdmin);
+      console.log(req.body);
       res.json({ message: "User successfully created", newUser });
       await newUser.save();
     }

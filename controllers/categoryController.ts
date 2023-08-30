@@ -52,7 +52,6 @@ export async function updateCategory(req: Request, res: Response) {
         where: { id },
       }
     );
-    console.log(req.body);
     return res.status(200).json({ message: "Category edited!", updatedCategory });
   } catch (error) {
     console.log(error);
