@@ -7,13 +7,19 @@ import Comment from "../models/Comment";
 import Favourite from "../models/Favourite";
 import Category from "../models/Category";
 import {} from "../types/environment";
+import * as pg from "pg";
 
 const sequelizeOptions = {
   host: process.env.DB_HOST,
-  // port: process.env.DB_PORT,
+  port: Number(process.env.DB_PORT),
   dialect: process.env.DB_DIALECT as Dialect,
+  dialectModule: require("pg"),
   logging: false,
 };
+
+if (process.env.DB_NAME === "postgres") {
+  sequelizeOptions.dialectModule = pg;
+}
 
 export const sequelize = new Sequelize(
   `${process.env.DB_NAME}`,
