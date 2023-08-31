@@ -9,6 +9,8 @@ import Category from "../models/Category";
 import {} from "../types/environment";
 
 const sequelizeOptions = {
+  host: process.env.DB_HOST,
+  // port: process.env.DB_PORT,
   dialect: process.env.DB_DIALECT as Dialect,
   logging: false,
 };
