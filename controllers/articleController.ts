@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Article from "../models/Article";
 import User from "../models/User";
 import Category from "../models/Category";
+import { handleUpload } from "../libs/multer";
 interface AuthRequest extends Request {
   auth?: {
     id: number;
@@ -54,14 +55,19 @@ export async function createArticle(req: AuthRequest, res: Response) {
   try {
     const { title, content, headline, categoryId } = req.body;
     const userId = req.auth?.id;
+    // Verifico que req.file no sea undefined
+    if (!req.file) {
+      return res.status(400).json({ message: "No file upload!" });
+    }
 
+    const uploadImage = await handleUpload(req.file);
     const article = await Article.create({
       title,
       content,
       headline,
       categoryId,
       userId,
-      image: req.file?.path,
+      image: uploadImage.url,
     });
     await article.save();
     return res.json({ article, message: "Article successflly created" });

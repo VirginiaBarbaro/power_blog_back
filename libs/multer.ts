@@ -2,6 +2,7 @@ import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import { createClient } from "@supabase/supabase-js";
+import { UploadImage } from "../types/uploadImage";
 
 const supabaseUrl = `${process.env.SUPABASE_URL}`;
 const supabaseKey = `${process.env.API_KEY}`;
@@ -25,7 +26,7 @@ export const upload = multer({
   },
 });
 
-export const handleUpload = async (file: Express.Multer.File) => {
+export const handleUpload = async (file: Express.Multer.File): Promise<UploadImage> => {
   try {
     // Sube el archivo a Supabase Storage
     const { data, error } = await supabase.storage
@@ -35,8 +36,12 @@ export const handleUpload = async (file: Express.Multer.File) => {
     if (error) {
       throw new Error("Error uploading file.");
     }
+    // Extraigo la URL de la img
+    const imgUrl = data.path;
+    // creo un objeto con la prop url
+    const uploadedImage: UploadImage = { url: imgUrl };
 
-    return data; // Retorna los datos del archivo si es necesario
+    return uploadedImage; // Retorna los datos del archivo si es necesario
   } catch (error) {
     console.error(error);
     throw new Error("Server error.");
