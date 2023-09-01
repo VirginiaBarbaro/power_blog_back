@@ -27,7 +27,7 @@ class Article extends Model {
           allowNull: false,
         },
         image: {
-          type: DataTypes.STRING,
+          type: DataTypes.JSON,
           allowNull: false,
         },
       },
