@@ -29,14 +29,17 @@ export async function updateInfoUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
     let { firstname, lastname, username, bio } = req.body;
-
+    if (!req.file) {
+      return res.status(400).json({ message: "No file upload!" });
+    }
+    const uploadImage = await handleUpload(req.file);
     const userToUpdate = await User.update(
       {
         firstname,
         lastname,
         username,
         bio,
-        avatar: req.file?.path,
+        avatar: uploadImage.url,
       },
       {
         where: { id },
