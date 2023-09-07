@@ -83,14 +83,18 @@ export async function updateArticle(req: Request, res: Response) {
     const { id } = req.params;
 
     const { title, content, headline, categoryId } = req.body;
-
+    
+    if (!req.file) {
+      return res.status(400).json({ message: "No file upload!" });
+    }
+    const uploadImage = await handleUpload(req.file);
     const updatedArticle = await Article.update(
       {
         title,
         content,
         headline,
         categoryId,
-        image: req.file?.path,
+        image: uploadImage.url,
       },
       {
         where: { id },
