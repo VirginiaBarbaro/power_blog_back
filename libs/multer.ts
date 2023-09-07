@@ -17,7 +17,12 @@ export const upload = multer({
       file.mimetype === "image/jpeg" ||
       file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
-      file.mimetype === "image/webp"
+      file.mimetype === "image/webp" ||
+      // -----------
+      file.mimetype === "avatar/jpeg" ||
+      file.mimetype === "avatar/png" ||
+      file.mimetype === "avatar/jpg" ||
+      file.mimetype === "avatar/webp"
     ) {
       cb(null, true); // Aceptar el archivo
     } else {
