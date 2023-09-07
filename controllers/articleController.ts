@@ -69,6 +69,7 @@ export async function createArticle(req: AuthRequest, res: Response) {
       userId,
       image: uploadImage.url,
     });
+    console.log(req.body);
     await article.save();
     return res.json({ article, message: "Article successflly created" });
   } catch (error) {
