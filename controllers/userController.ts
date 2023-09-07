@@ -1,6 +1,7 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
+import { handleUpload } from "../libs/multer";
 
 export async function getUsers(_req: Request, res: Response) {
   try {
@@ -79,13 +80,17 @@ export async function createUser(req: Request, res: Response) {
     if (existingEmail) {
       return res.json({ message: "Email already exist!" });
     } else {
+      if (!req.file) {
+        return res.status(400).json({ message: "No file upload!" });
+      }
+      const uploadImage = await handleUpload(req.file);
       const newUser = await User.create({
         firstname: firstname,
         lastname: lastname,
         email: email,
         bio: bio,
         username: username,
-        avatar: req.file?.path,
+        avatar: uploadImage.url,
         isAdmin: isAdmin,
         password: password,
       });
